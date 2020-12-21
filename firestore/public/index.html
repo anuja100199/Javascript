@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		BloggingApp - Javascrpit Firestore Assignment
+	</title>
+	<link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="./assets/css/owl.carousel.min.css">
+        <link rel="stylesheet" href="./assets/css/flaticon.css">
+        <link rel="stylesheet" href="./assets/css/slicknav.css">
+        <link rel="stylesheet" href="./assets/css/animate.min.css">
+        <link rel="stylesheet" href="./assets/css/magnific-popup.css">
+        <link rel="stylesheet" href="./assets/css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="./assets/css/themify-icons.css">
+        <link rel="stylesheet" href="./assets/css/slick.css">
+        <link rel="stylesheet" href="./assets/css/nice-select.css">
+        <link rel="stylesheet" href="./assets/css/style.css">
+        <style>
+            .center {
+                        margin: auto;
+                        padding: 10px;
+                        }
+            .my {
+                    background-color: inherit;
+                    border: unset;
+                    padding-bottom: 15px;
+                    margin-left: -6px;
+                    color: #795376;
+                    cursor: pointer;
+                }
+        </style>
+</head>
+<body>
+		
+	<section class="login_part ">
+        <b><h2 class="text-center">BloggingApp</h2></b><br><br>
+        <h5 class="text-center logged-out">Login or Signup to view the blogs</h5>
+        <div class="container logged-out">
+            <div class="row align-items-center">
+                <div class="col-lg-4 col-md-4">
+                    <div class="login_part_form">
+                            <button class="btn_3" onclick="openForm()">
+                                 Log In</button><br>
+                            <form class="row contact_form form-popup" method="post" id="login-form" style="display: none;">
+                                <div class="col-md-12 form-group p_star">
+                                    <input type="email" class="form-control" id="email" name="name"
+                                        placeholder="Email id">
+                                </div>
+                                <div class="col-md-12 form-group p_star">
+                                    <input type="password" class="form-control" id="password" name="password"
+                                        placeholder="Password">
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    <button type="submit" name="login" class="btn_1">
+                                        Log in
+                                    </button>
+                                    <button type="button" name="close" class="btn_3" onclick="closeForm()">
+                                        close
+                                    </button>
+                                </div>
+                            </form>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <button type="button" class="btn_3" id="googleBtn" onclick="googleLogin();" style="margin-bottom: 385px;
+                    margin-left: 40px;">
+                        Sign In using Google</button>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <div class="login_part_form">
+                            <button class="btn_3" onclick="openSignup()">
+                                 Sign Up</button><br>
+                            <form class="row contact_form" method="post" id="signup-form" style="display: none;">
+                                <div class="col-md-12 form-group p_star">
+                                    <input type="email" class="form-control" id="signup-email" name="name"
+                                        placeholder="Email id">
+                                </div>
+                                <div class="col-md-12 form-group p_star">
+                                    <input type="password" class="form-control" id="signup-password" name="password"
+                                        placeholder="Password">
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    <button type="submit" name="signup" class="btn_1">
+                                        sign up
+                                    </button>
+                                    <button type="button" class="btn_3" onclick="closeSignup()">
+                                         close
+                                    </button>
+                                </div>
+                            </form>
+                        
+                       <!-- <input type='hidden' id="logout" value="false"> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="logged-in">
+        <h2 style="text-align: center;">Here are the blogs</h2>
+        <section class="product_list">
+            <div class="container">
+                <div class="row center">
+                    <div class="col-md-6">
+                        <div class="product_sidebar blogs">          
+                            
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="product_list" style="padding-left: 50px;">
+                            <div class="row">
+                                <ul type="none">
+                                <li>
+                                <button id="logout" class="btn_3">Logout</button></li><br>
+                                    <li>
+                                        <button class="btn_3" onclick="openPost()">Post a Blog</button><br><br>
+                                        <form class="row contact_form" id="postForm" style="display: none;">
+                                            <div class="col-md-6 form-group p_star">
+                                                <input type="text" class="form-control" id="title" placeholder="Enter title"></div>
+                                            <div class="col-md-6 form-group p_star">
+                                                <input type="textarea" class="form-control" id="content" placeholder="Content goes here">
+                                                   </div>
+                                            <div class="col-md-6 form-group p_star">
+                                                <button type="submit" class="btn_1" id="postData">Post Blog</button>
+                                                <button type="button" class="btn_3" onclick="closePost()">Close</button>
+                                            </div>
+                                            <input type="hidden" id="testVal">
+                                        </form>
+                                    </li><br>
+                                    <li>
+                                        <div class="product_sidebar blogs">          
+                                            <div class="single_sedebar">
+                                                <div class="select_option">
+                                                    <div class="select_option_list">Filter<i class="right fas fa-caret-down"></i> </div>
+                                                        <div class="select_option_dropdown">
+                                                            <form id="filterForm">
+                                                                <div class="select_option_dropdown">Javascrpit</div>
+                                                                <button type="submit" class="my" value="Javascript" name="radio" id="btn1" onclick="setVal('btn1')">
+                                                                    Javascript
+                                                                </button><br>
+                                                                <button type="submit" class="my" value="Machine Learning" name="radio" id="btn2" onclick="setVal('btn2')">
+                                                                    Machine Learning
+                                                                </button><br>
+                                                                <button type="submit" class="my" value="Python" name="radio" id="btn3" onclick="setVal('btn3')">
+                                                                    Python
+                                                                </button><br>
+                                                                <button type="submit" class="my" value="All" name="radio" id="btn4" onclick="setVal('btn4')">
+                                                                    All
+                                                                </button>
+                                                                
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                 </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <input type="hidden" value="" id="setup">
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+                
+             </section>
+        </div>
+    </section>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
+
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  var firebaseConfig = {
+    apiKey: "AIzaSyAgbI6uQcI_3V19xVTE9331LmXWTOGCbGU",
+    authDomain: "bloggingapp-89953.firebaseapp.com",
+    projectId: "bloggingapp-89953",
+    storageBucket: "bloggingapp-89953.appspot.com",
+    messagingSenderId: "496052656936",
+    appId: "1:496052656936:web:b27af1bce52bcf051f8e1d",
+    measurementId: "G-Z783HSNTBX"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+
+  // make auth and firestore references
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+//   console.log(db)
+
+  // update firestore setting
+  db.settings({ timestampsInSnapShots: true});
+</script>
+<script src="./scripts/auth.js"></script>
+<script src="./scripts/index.js"></script>
+
+
+ <!-- Jquery, Popper, Bootstrap -->
+ <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
+   
+ <script src="./assets/js/slick.min.js"></script>
+
+ <!-- One Page, Animated-HeadLin -->
+ <script src="./assets/js/wow.min.js"></script>
+ <!-- <script src="./assets/js/animated.headline.js"></script> -->
+ <script src="./assets/js/jquery.magnific-popup.js"></script>
+
+ <!-- Scrollup, nice-select, sticky -->
+ <script src="./assets/js/jquery.scrollUp.min.js"></script>
+
+ <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
+ 
+ <!-- Jquery Plugins, main Jquery -->    
+ <script src="./assets/js/plugins.js"></script>
+ <script src="./assets/js/main.js"></script>
+
+<script>
+function openForm() {
+  document.getElementById("login-form").style.display = "block";
+  document.getElementById("signup-form").style.display = "none";
+}
+function openSignup(){
+    document.getElementById("signup-form").style.display ="block";
+    document.getElementById("login-form").style.display ="none";
+}
+function closeSignup() {
+  document.getElementById("signup-form").style.display = "none";
+}
+function closeForm() {
+  document.getElementById("login-form").style.display = "none";
+}
+function openPost(){
+    document.getElementById("postForm").style.display ='block';
+}
+function closePost(){
+    document.getElementById("postForm").style.display ='none';
+}
+function setVal(idName){
+    document.getElementById("setup").value = idName;
+}
+</script>
+</body>
+
+</html>
